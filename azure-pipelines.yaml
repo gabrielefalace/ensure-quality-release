@@ -23,7 +23,7 @@ stages:
     
     - task: AzureKeyVault@2
       inputs:
-        azureSubscription: 'Your-Azure-Subscription'
+        azureSubscription: $(falace-kv-subscription-id)
         KeyVaultName: 'falace-kv'
         SecretsFilter: '*'
         RunAsPreJob: false
