@@ -3,7 +3,8 @@
 #  - group: e2e-gov-demo-kv
 
 
-trigger: main
+trigger: 
+- main
 
 variables:
   # Agent VM image name
@@ -27,7 +28,7 @@ stages:
           -backend-config="container_name=$CONTAINER_NAME" \
           -backend-config="access_key=$ARM_ACCESS_KEY"
       displayName: Terraform Init
-      env:
+      #env:
         #TF_STATE_BLOB_ACCOUNT_NAME:   $(kv-tf-state-blob-account)
         #TF_STATE_BLOB_CONTAINER_NAME: $(kv-tf-state-blob-container)
         #TF_STATE_BLOB_FILE:           $(kv-tf-state-blob-file)
