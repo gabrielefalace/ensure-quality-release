@@ -1,0 +1,34 @@
+# Load secrets from Key Vault
+#variables:
+#  - group: e2e-gov-demo-kv
+
+
+trigger: main
+
+variables:
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'  
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: BuildJob
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - bash: source ./create_azure_storage.sh
+      displayName: Creating Storage
+
+    - bash: |
+        cd terraform && terraform init \
+          -backend-config="resource_group_name=$RESOURCE_GROUP_NAME" \
+          -backend-config="storage_account_name=$STORAGE_ACCOUNT_NAME" \
+          -backend-config="container_name=$CONTAINER_NAME" \
+          -backend-config="access_key=$ARM_ACCESS_KEY"
+      displayName: Terraform Init
+      env:
+        #TF_STATE_BLOB_ACCOUNT_NAME:   $(kv-tf-state-blob-account)
+        #TF_STATE_BLOB_CONTAINER_NAME: $(kv-tf-state-blob-container)
+        #TF_STATE_BLOB_FILE:           $(kv-tf-state-blob-file)
+        #TF_STATE_BLOB_SAS_TOKEN:      $(kv-tf-state-sas-token)
