@@ -1,10 +1,5 @@
 # Load secrets from Key Vault
-- task: AzureKeyVault@2
-  inputs:
-    azureSubscription: 'Azure subscription 1(efa42e01-27ef-4660-b3e7-2f62a24bd429)'
-    KeyVaultName: 'falace-kv'
-    SecretsFilter: '*'
-    RunAsPreJob: true
+
 #variables:
 #  - group: e2e-gov-demo-kv
 
@@ -27,12 +22,12 @@ stages:
     
     steps:
     
-#    - task: AzureKeyVault@2
-#      inputs:
-#        connectedServiceName: 'Azure subscription 1' 
-#        KeyVaultName: falace-kv
-#        SecretsFilter: '*'
-#        RunAsPreJob: true
+    - task: AzureKeyVault@2
+      inputs:
+        azureSubscription: 'Azure subscription 1(efa42e01-27ef-4660-b3e7-2f62a24bd429)'
+        KeyVaultName: 'falace-kv'
+        SecretsFilter: '*'
+        RunAsPreJob: true
 
     - bash: ls
       workingDirectory: $(projectRoot)
