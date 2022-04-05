@@ -35,9 +35,10 @@ stages:
 
     - bash: |
         cd terraform && terraform init \
-          -backend-config="resource_group_name=$RESOURCE_GROUP_NAME" \
-          -backend-config="storage_account_name=$STORAGE_ACCOUNT_NAME" \
-          -backend-config="container_name=$CONTAINER_NAME" \
+          -backend-config="resource_group_name=$TF_RESOURCE_GROUP" \
+          -backend-config="storage_account_name=$TF_ACCOUNT_NAME" \
+          -backend-config="container_name=$TF_CONTAINER_NAME" \
+          -backend-config="key=$TF_KEY" \
           -backend-config="access_key=$ARM_ACCESS_KEY"
       displayName: Terraform Init
       
@@ -48,9 +49,7 @@ stages:
         ARM_CLIENT_SECRET:   $(falace-kv-client-secret)
         ARM_TENANT_ID:       $(falace-kv-tenant-id)
         ARM_ACCESS_KEY:      $(falace-kv-access-key)
-      
-      #env:
-        #TF_STATE_BLOB_ACCOUNT_NAME:   $(kv-tf-state-blob-account)
-        #TF_STATE_BLOB_CONTAINER_NAME: $(kv-tf-state-blob-container)
-        #TF_STATE_BLOB_FILE:           $(kv-tf-state-blob-file)
-        #TF_STATE_BLOB_SAS_TOKEN:      $(kv-tf-state-sas-token)
+        TF_RESOURCE_GROUP: $(falace-kv-resource-group)
+        TF_ACCOUNT_NAME:   $(falace-kv-account-name)
+        TF_CONTAINER_NAME: $(falace-kv-container-name)
+        TF_KEY:           $(falace-kv-key)

@@ -51,7 +51,5 @@ module "publicip" {
 }
 
 terraform {
-  backend "azurerm" {
-    key = "terraform.tfstate"
-  }
+  backend "azurerm" {}
 }
