@@ -21,27 +21,27 @@ stages:
     
     steps:
     
- #   - task: AzureKeyVault@2
- #     inputs:
- #       connectedServiceName: 'Azure subscription 1' 
- #       KeyVaultName: falace-kv
- #       SecretsFilter: '*'
- #       RunAsPreJob: true
+    - task: AzureKeyVault@2
+      inputs:
+        connectedServiceName: 'Azure subscription 1' 
+        KeyVaultName: falace-kv
+        SecretsFilter: '*'
+        RunAsPreJob: true
 
     - bash: ls
       workingDirectory: $(projectRoot)
       displayName: Listing
 
-    - bash: source ./terraform/create_azure_storage.sh
-      workingDirectory: $(projectRoot)
-      displayName: Creating Storage
+    #- bash: source ./terraform/create_azure_storage.sh
+    #  workingDirectory: $(projectRoot)
+    #  displayName: Creating Storage
 
     - bash: |
         cd terraform && terraform init \
           -backend-config="resource_group_name=$RESOURCE_GROUP_NAME" \
           -backend-config="storage_account_name=$STORAGE_ACCOUNT_NAME" \
           -backend-config="container_name=$CONTAINER_NAME" \
-          -backend-config="primary_access_key=$ARM_ACCESS_KEY"
+          -backend-config="access_key=$ARM_ACCESS_KEY"
       displayName: Terraform Init
       
       # sensitive data, will rotate once it works.
@@ -50,6 +50,7 @@ stages:
         ARM_CLIENT_ID:       $(falace-kv-client-id)
         ARM_CLIENT_SECRET:   $(falace-kv-client-secret)
         ARM_TENANT_ID:       $(falace-kv-tenant-id)
+        ARM_ACCESS_KEY:      $(falace-kv-access-key)
       
       #env:
         #TF_STATE_BLOB_ACCOUNT_NAME:   $(kv-tf-state-blob-account)
