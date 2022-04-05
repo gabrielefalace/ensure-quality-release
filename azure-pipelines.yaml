@@ -37,12 +37,12 @@ stages:
         printenv
       displayName: Print Env
       env:
-        ARM_SUBSCRIPTION_ID: $(falace-kv-subscription-id)
-        ARM_CLIENT_ID:       $(falace-kv-client-id)
-        ARM_CLIENT_SECRET:   $(falace-kv-client-secret)
-        ARM_TENANT_ID:       $(falace-kv-tenant-id)
-        ARM_ACCESS_KEY:      $(falace-kv-access-key)
-        TF_RESOURCE_GROUP: $(falace-kv-resource-group)
-        TF_ACCOUNT_NAME:   $(falace-kv-account-name)
-        TF_CONTAINER_NAME: $(falace-kv-container-name)
-        TF_KEY:           $(falace-kv-key)
+        ARM_SUBSCRIPTION_ID: $(subscription-id)
+        ARM_CLIENT_ID:       $(client-id)
+        ARM_CLIENT_SECRET:   $(client-secret)
+        ARM_TENANT_ID:       $(tenant-id)
+        ARM_ACCESS_KEY:      $(access-key)
+        TF_RESOURCE_GROUP: $(resource-group)
+        TF_ACCOUNT_NAME:   $(account-name)
+        TF_CONTAINER_NAME: $(container-name)
+        TF_KEY:           $(key)
