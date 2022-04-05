@@ -53,3 +53,7 @@ stages:
         TF_ACCOUNT_NAME:   $(falace-kv-account-name)
         TF_CONTAINER_NAME: $(falace-kv-container-name)
         TF_KEY:           $(falace-kv-key)
+    
+    - bash: |
+        printenv
+      displayName: Print Env
