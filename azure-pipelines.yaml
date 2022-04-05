@@ -18,7 +18,16 @@ stages:
   - job: BuildJob
     pool:
       vmImage: $(vmImageName)
+    
     steps:
+    
+    - task: AzureKeyVault@2
+      inputs:
+        azureSubscription: 'Your-Azure-Subscription'
+        KeyVaultName: 'falace-kv'
+        SecretsFilter: '*'
+        RunAsPreJob: false
+
     - bash: ls
       workingDirectory: $(projectRoot)
       displayName: Listing
@@ -34,6 +43,14 @@ stages:
           -backend-config="container_name=$CONTAINER_NAME" \
           -backend-config="access_key=$ARM_ACCESS_KEY"
       displayName: Terraform Init
+      
+      # sensitive data, will rotate once it works.
+      env:
+        ARM_SUBSCRIPTION_ID: $(falace-kv-subscription-id)
+        ARM_CLIENT_ID:       $(falace-kv-client-id)
+        ARM_CLIENT_SECRET:   $(falace-kv-client-secret)
+        ARM_TENANT_ID:       $(falace-kv-tenant-id)
+      
       #env:
         #TF_STATE_BLOB_ACCOUNT_NAME:   $(kv-tf-state-blob-account)
         #TF_STATE_BLOB_CONTAINER_NAME: $(kv-tf-state-blob-container)
