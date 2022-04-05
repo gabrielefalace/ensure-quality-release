@@ -52,9 +52,5 @@ module "publicip" {
 
 terraform {
   backend "azurerm" {
-    resource_group_name =  "ens-qua-rel"
-    storage_account_name = "tfstate3ensquarel"
-    container_name       = "tfstate"
-    key           = "terraform.tfstate"
   }
 }
