@@ -8,7 +8,8 @@ trigger:
 
 variables:
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'  
+  vmImageName: 'ubuntu-latest'
+  projectRoot: $(System.DefaultWorkingDirectory)
 
 stages:
 - stage: Build
@@ -19,6 +20,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - bash: source ./create_azure_storage.sh
+      workingDirectory: $(projectRoot)
       displayName: Creating Storage
 
     - bash: |
