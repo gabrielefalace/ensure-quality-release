@@ -32,17 +32,10 @@ stages:
     - bash: ls
       workingDirectory: $(projectRoot)
       displayName: Listing
-
+    
     - bash: |
-        cd terraform && terraform init \
-          -backend-config="resource_group_name=$TF_RESOURCE_GROUP" \
-          -backend-config="storage_account_name=$TF_ACCOUNT_NAME" \
-          -backend-config="container_name=$TF_CONTAINER_NAME" \
-          -backend-config="key=$TF_KEY" \
-          -backend-config="access_key=$ARM_ACCESS_KEY"
-      displayName: Terraform Init
-      
-      # sensitive data, will rotate once it works.
+        printenv
+      displayName: Print Env
       env:
         ARM_SUBSCRIPTION_ID: $(falace-kv-subscription-id)
         ARM_CLIENT_ID:       $(falace-kv-client-id)
@@ -53,7 +46,3 @@ stages:
         TF_ACCOUNT_NAME:   $(falace-kv-account-name)
         TF_CONTAINER_NAME: $(falace-kv-container-name)
         TF_KEY:           $(falace-kv-key)
-    
-    - bash: |
-        printenv
-      displayName: Print Env
