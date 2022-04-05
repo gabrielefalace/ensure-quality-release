@@ -22,8 +22,8 @@ stages:
     - bash: ls
       workingDirectory: $(projectRoot)
       displayName: Listing
-      
-    - bash: source ./create_azure_storage.sh
+
+    - bash: source ./terraform/create_azure_storage.sh
       workingDirectory: $(projectRoot)
       displayName: Creating Storage
 
