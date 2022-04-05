@@ -27,21 +27,11 @@ stages:
         azureSubscription: 'Azure subscription 1(efa42e01-27ef-4660-b3e7-2f62a24bd429)'
         KeyVaultName: 'falace-kv'
         SecretsFilter: '*'
-        RunAsPreJob: true
+        RunAsPreJob: false
 
     - bash: ls
       workingDirectory: $(projectRoot)
       displayName: Listing
-
-    - bash: echo $TEST_VARIABLE
-      workingDirectory: $(projectRoot)
-      displayName: Listing
-      env:
-        TEST_VARIABLE: $(TEST_VARIABLE)
-
-    #- bash: source ./terraform/create_azure_storage.sh
-    #  workingDirectory: $(projectRoot)
-    #  displayName: Creating Storage
 
     - bash: |
         cd terraform && terraform init \
