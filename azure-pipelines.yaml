@@ -64,3 +64,4 @@ stages:
 
   - bash: |
         terraform apply
+    displayName: Terraform apply
