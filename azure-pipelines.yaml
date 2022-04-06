@@ -62,6 +62,6 @@ stages:
         TF_CONTAINER_NAME: $(container-name)
         TF_KEY:           $(key)
 
-  - bash: |
+    - bash: |
         terraform apply
-    displayName: Terraform apply
+      displayName: Terraform apply
