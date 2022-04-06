@@ -28,10 +28,6 @@ stages:
         KeyVaultName: 'falace-kv'
         SecretsFilter: '*'
         RunAsPreJob: true
-
-    - bash: ls
-      workingDirectory: $(projectRoot)
-      displayName: Listing
     
     - bash: |
         printenv
@@ -65,3 +61,6 @@ stages:
         TF_ACCOUNT_NAME:   $(account-name)
         TF_CONTAINER_NAME: $(container-name)
         TF_KEY:           $(key)
+
+  - bash: |
+        terraform apply
