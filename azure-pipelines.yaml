@@ -63,5 +63,5 @@ stages:
         TF_KEY:           $(key)
 
     - bash: |
-        terraform apply
+        cd terraform && terraform apply -auto-approve
       displayName: Terraform apply
