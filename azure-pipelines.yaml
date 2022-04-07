@@ -1,4 +1,16 @@
 # Load secrets from Key Vault
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Azure subscription 1(efa42e01-27ef-4660-b3e7-2f62a24bd429)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      cd terraform &&\
+      az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID &&\
+      terraform apply -auto-approve
+    addSpnToEnvironment: true
+    useGlobalConfig: true
+    failOnStandardError: true
 
 #variables:
 #  - group: e2e-gov-demo-kv
