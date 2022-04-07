@@ -43,7 +43,7 @@ stages:
         TF_ACCOUNT_NAME:   $(account-name)
         TF_CONTAINER_NAME: $(container-name)
         TF_KEY:           $(key)
-        
+
 
     - bash: |
         cd terraform && terraform init \
