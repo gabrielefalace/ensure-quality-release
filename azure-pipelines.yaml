@@ -29,20 +29,20 @@ stages:
         SecretsFilter: '*'
         RunAsPreJob: true
 
-    - bash: |
-        az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID &&\
-        az group list
-      displayName: AZ Login & List
-      env:
-        ARM_SUBSCRIPTION_ID: $(subscription-id)
-        ARM_CLIENT_ID:       $(client-id)
-        ARM_CLIENT_SECRET:   $(client-secret)
-        ARM_TENANT_ID:       $(tenant-id)
-        ARM_ACCESS_KEY:      $(access-key)
-        TF_RESOURCE_GROUP: $(resource-group)
-        TF_ACCOUNT_NAME:   $(account-name)
-        TF_CONTAINER_NAME: $(container-name)
-        TF_KEY:           $(key)
+#    - bash: |
+ #       az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID &&\
+  #      az group list
+   #   displayName: AZ Login & List
+    #  env:
+   #     ARM_SUBSCRIPTION_ID: $(subscription-id)
+   #     ARM_CLIENT_ID:       $(client-id)
+   #     ARM_CLIENT_SECRET:   $(client-secret)
+   #     ARM_TENANT_ID:       $(tenant-id)
+   #     ARM_ACCESS_KEY:      $(access-key)
+   #     TF_RESOURCE_GROUP: $(resource-group)
+   #     TF_ACCOUNT_NAME:   $(account-name)
+   #     TF_CONTAINER_NAME: $(container-name)
+   #     TF_KEY:           $(key)
 
 
     - bash: |
@@ -70,7 +70,7 @@ stages:
 
     - bash: |
         cd terraform &&\
-          az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID &&\
+      # az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID &&\
           terraform apply -auto-approve
       displayName: Azure Login, Terraform Apply
       env:
