@@ -51,7 +51,7 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           cd terraform &&\
-          az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID &&\
+          az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --tenant $tenantId &&\
           terraform init &&\
           terraform apply -auto-approve
         addSpnToEnvironment: true
