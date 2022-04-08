@@ -29,27 +29,6 @@ stages:
         SecretsFilter: '*'
         RunAsPreJob: true
 
-#    - bash: |
- #       az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID &&\
-  #      az group list
-   #   displayName: AZ Login & List
-    #  env:
-   #     ARM_SUBSCRIPTION_ID: $(subscription-id)
-   #     ARM_CLIENT_ID:       $(client-id)
-   #     ARM_CLIENT_SECRET:   $(client-secret)
-   #     ARM_TENANT_ID:       $(tenant-id)
-   #     ARM_ACCESS_KEY:      $(access-key)
-   #     TF_RESOURCE_GROUP: $(resource-group)
-   #     TF_ACCOUNT_NAME:   $(account-name)
-   #     TF_CONTAINER_NAME: $(container-name)
-   #     TF_KEY:           $(key)
-
-    - bash: |
-        echo $servicePrincipalId &&\
-        echo $servicePrincipalKey &&\
-        echo $tenantId
-      displayName: Show implicit vars
-
 
     - bash: |
         az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --t $ARM_TENANT_ID &&\
@@ -89,10 +68,10 @@ stages:
           -backend-config="container_name=$TF_CONTAINER_NAME" \
           -backend-config="key=$TF_KEY" \
           -backend-config="access_key=$ARM_ACCESS_KEY" \
-          -backend-config=subscription_id="$(ARM_SUBSCRIPTION_ID)" \
-          -backend-config=tenant_id="$(ARM_TENANT_ID)" \
-          -backend-config=client_id="$(ARM_CLIENT_ID)" \
-          -backend-config=client_secret="$(ARM_CLIENT_SECRET)" &&\
+          -backend-config=subscription_id="$ARM_SUBSCRIPTION_ID" \
+          -backend-config=tenant_id="$ARM_TENANT_ID" \
+          -backend-config=client_id="$ARM_CLIENT_ID" \
+          -backend-config=client_secret="$ARM_CLIENT_SECRET" &&\
         terraform apply -auto-approve
       displayName: Terraform
       env:
