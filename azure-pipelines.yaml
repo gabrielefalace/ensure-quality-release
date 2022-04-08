@@ -45,6 +45,14 @@ stages:
    #     TF_KEY:           $(key)
 
     - bash: |
+        echo $servicePrincipalId &&\
+        echo $servicePrincipalKey &&\
+        echo $tenantId
+      displayName: Show implicit vars
+
+
+    - bash: |
+        az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --t $tenantId &&\
         az account show
       displayName: Show logged account
 
@@ -69,7 +77,7 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           cd terraform &&\
-          az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --tenant $tenantId &&\
+          az login --service-principal -u $servicePrincipalId -p $servicePrincipalKey --t $tenantId &&\
           terraform init \
             -backend-config="resource_group_name=$TF_RESOURCE_GROUP" \
             -backend-config="storage_account_name=$TF_ACCOUNT_NAME" \
