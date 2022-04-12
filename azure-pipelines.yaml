@@ -15,7 +15,7 @@ variables:
 
 stages:
 - stage: Provision
-  displayName: Provision IaC stage
+  displayName: Provision Infrastructure
   jobs:
   - job: BuildJob
     pool:
@@ -108,23 +108,23 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
-#- stage:
-#  jobs:
-#  - deployment: FakeRestAPI
-#    pool:
-#      vmImage: 'Ubuntu-16.04'
-#    environment: 'TEST'
-#    strategy:
-#      runOnce:
-#        deploy:
-#          steps:
-#          - task: AzureWebApp@1
-#            displayName: 'Deploy Azure Web App'
-#            inputs:
-#              azureSubscription: 'Azure subscription 1(efa42e01-27ef-4660-b3e7-2f62a24bd429)'
-#              appName: '' # app service name
-#              appType: webApp
-#              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+- stage:
+  jobs:
+  - deployment: FakeRestAPI
+    pool:
+      vmImageName: 'ubuntu-latest'
+    environment: 'TEST'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebApp@1
+            displayName: 'Deploy Azure Web App'
+            inputs:
+              azureSubscription: 'Azure subscription 1(efa42e01-27ef-4660-b3e7-2f62a24bd429)'
+              appName: 'EnsQuaRel-appType-AppService' # app service name
+              appType: webApp
+              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
   # - deployment: VMDeploy
   #   displayName: NAME
   #   environment:
