@@ -86,10 +86,11 @@ stages:
         TF_KEY:           $(key)
         
 - stage: Build
+  displayName: Build FakeRestAPI
   jobs:
   - job: Build
     pool:
-      name: Hosted Ubuntu 1604
+      vmImageName: 'ubuntu-latest'
     steps:
     # Needed for Terraform VM deployment
     # - task: InstallSSHKey@0
