@@ -109,6 +109,7 @@ stages:
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
 - stage:
+  displayName: Deploy FakeRestAPI
   jobs:
   - deployment: FakeRestAPI
     pool:
@@ -125,8 +126,11 @@ stages:
               appName: EnsQuaRel-appType-AppService
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+- stage:  
+  displayName: 'Deploy VM for tests'
+  jobs:
   - deployment: VMDeploy
-    displayName: 'Deploy VM for tests'
+    
     environment:
       name:  TEST
       resourceType: VirtualMachine
