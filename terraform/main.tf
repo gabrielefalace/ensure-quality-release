@@ -59,6 +59,13 @@ module "publicip" {
   resource_group   = "${var.resource_group}"
 }
 
+module "vm" {
+  source = "./modules/vm"
+  location = "${var.location}"
+  resource_group = "${var.resource_group}"
+}
+
+
 terraform {
   backend "azurerm" {}
 }
