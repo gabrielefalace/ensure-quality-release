@@ -87,12 +87,13 @@ stages:
     pool:
       vmImageName: 'ubuntu-latest'
     steps:
-    # Needed for Terraform VM deployment
-    # - task: InstallSSHKey@0
-    #   inputs:
-    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
-    #     sshPublicKey: 'PUBLIC_KEY'
-    #     sshKeySecureFile: 'id_rsa'
+    - task: InstallSSHKey@0
+      inputs:
+        knownHostsEntry: ''
+        sshPublicKey: $PUB_KEY
+        sshKeySecureFile: 'id_rsa'
+      env:
+        PUB_KEY: $(pubKey)
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
       inputs:
