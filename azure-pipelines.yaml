@@ -130,7 +130,6 @@ stages:
   displayName: 'Deploy VM for tests'
   jobs:
   - deployment: VMDeploy
-    
     environment:
       name:  TEST
       resourceType: VirtualMachine
