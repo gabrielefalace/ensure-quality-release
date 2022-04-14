@@ -18,10 +18,12 @@ resource "azurerm_linux_virtual_machine" "test" {
   size                = "Standard_B1s"
   admin_username      = "gfalace"
   network_interface_ids = [azurerm_network_interface.test.id]
+  
   admin_ssh_key {
-    username   = "gfalace"
+    username = "gfalace"
     public_key = file("~/.ssh/id_rsa.pub")
   }
+
   os_disk {
     caching           = "ReadWrite"
     storage_account_type = "Standard_LRS"
