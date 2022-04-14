@@ -27,7 +27,7 @@ stages:
     
     - task: InstallSSHKey@0
       inputs:
-        knownHostsEntry: ''
+        knownHostsEntry: 'name'
         sshPublicKey: $PUB_KEY
         sshKeySecureFile: 'id_rsa'
       env:
