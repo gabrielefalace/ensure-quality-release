@@ -107,7 +107,7 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
-- stage: Deploy API
+- stage: DeployAPI
   displayName: Deploy FakeRestAPI
   jobs:
   - deployment: FakeRestAPI
@@ -125,7 +125,7 @@ stages:
               appName: EnsQuaRel-appType-AppService
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-- stage: Deploy VM
+- stage: DeployVM
   displayName: Deploy VM for tests
   jobs:
   - deployment: VMDeploy
