@@ -66,6 +66,7 @@ stages:
           -backend-config=subscription_id="$ARM_SUBSCRIPTION_ID" \
           -backend-config=tenant_id="$ARM_TENANT_ID" \
           -backend-config=client_id="$ARM_CLIENT_ID" \
+          -backend-config=public_key="$PUB_KEY" \
           -backend-config=client_secret="$ARM_CLIENT_SECRET" &&\
         terraform apply -auto-approve
       displayName: Terraform
@@ -79,6 +80,7 @@ stages:
         TF_ACCOUNT_NAME:   $(account-name)
         TF_CONTAINER_NAME: $(container-name)
         TF_KEY:           $(key)
+        PUB_KEY: $(pubKey)
         
 - stage: Build
   displayName: Build FakeRestAPI
@@ -87,6 +89,7 @@ stages:
     pool:
       vmImageName: 'ubuntu-latest'
     steps:
+    
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: ''
@@ -94,6 +97,7 @@ stages:
         sshKeySecureFile: 'id_rsa'
       env:
         PUB_KEY: $(pubKey)
+    
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
       inputs:
