@@ -1,14 +1,9 @@
-# Load secrets from Key Vault
-
-#variables:
-#  - group: e2e-gov-demo-kv
 name: Azure Pipelines
 
 trigger: 
 - main
 
 variables:
-  # Agent VM image name
   vmImageName: 'ubuntu-latest'
   projectRoot: $(System.DefaultWorkingDirectory)
   python.version: '3.7.6'
