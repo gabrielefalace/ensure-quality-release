@@ -63,6 +63,7 @@ module "vm" {
   source = "./modules/vm"
   location = "${var.location}"
   resource_group = "${var.resource_group}"
+  subnet_id = "${module.network.subnet_id_test}"
 }
 
 
