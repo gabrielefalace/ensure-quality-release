@@ -24,7 +24,14 @@ stages:
         KeyVaultName: 'falace-kv'
         SecretsFilter: '*'
         RunAsPreJob: true
-
+    
+    - task: InstallSSHKey@0
+      inputs:
+        knownHostsEntry: ''
+        sshPublicKey: $PUB_KEY
+        sshKeySecureFile: 'id_rsa'
+      env:
+        PUB_KEY: $(pubKey)
 
     - bash: |
         az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --t $ARM_TENANT_ID &&\
@@ -54,12 +61,6 @@ stages:
         TF_ACCOUNT_NAME:   $(account-name)
         TF_CONTAINER_NAME: $(container-name)
         TF_KEY:           $(key)
-
-    - bash: |
-        echo $PUB_KEY
-      displayName: Terraform
-      env:
-        PUB_KEY: $(pubKey)
 
     - bash: |
         cd terraform &&\
@@ -96,14 +97,6 @@ stages:
       vmImageName: 'ubuntu-latest'
     steps:
     
-    - task: InstallSSHKey@0
-      inputs:
-        knownHostsEntry: ''
-        sshPublicKey: $PUB_KEY
-        sshKeySecureFile: 'id_rsa'
-      env:
-        PUB_KEY: $(pubKey)
-    
     - task: ArchiveFiles@2
       displayName: 'Archive FakeRestAPI'
       inputs:
@@ -114,7 +107,7 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
-- stage:
+- stage: Deploy API
   displayName: Deploy FakeRestAPI
   jobs:
   - deployment: FakeRestAPI
@@ -132,8 +125,8 @@ stages:
               appName: EnsQuaRel-appType-AppService
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-- stage:  
-  displayName: 'Deploy VM for tests'
+- stage: Deploy VM
+  displayName: Deploy VM for tests
   jobs:
   - deployment: VMDeploy
     environment:
