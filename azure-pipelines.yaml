@@ -114,7 +114,7 @@ stages:
   jobs:
   - deployment: VMDeploy
     environment:
-      name:  TEST
+      name:  'TEST'
       resourceType: VirtualMachine
     strategy:
       runOnce:
