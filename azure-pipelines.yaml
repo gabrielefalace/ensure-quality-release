@@ -24,33 +24,11 @@ stages:
         KeyVaultName: 'falace-kv'
         SecretsFilter: '*'
         RunAsPreJob: true
-    
-    - task: InstallSSHKey@0
-      inputs:
-        knownHostsEntry: ''
-        sshPublicKey: $PUB_KEY
-        sshKeySecureFile: 'id_rsa'
-      env:
-        PUB_KEY: $(pubKey)
 
     - bash: |
         az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --t $ARM_TENANT_ID &&\
         az account show
       displayName: Show logged account
-      env:
-        ARM_SUBSCRIPTION_ID: $(subscription-id)
-        ARM_CLIENT_ID:       $(client-id)
-        ARM_CLIENT_SECRET:   $(client-secret)
-        ARM_TENANT_ID:       $(tenant-id)
-        ARM_ACCESS_KEY:      $(access-key)
-        TF_RESOURCE_GROUP: $(resource-group)
-        TF_ACCOUNT_NAME:   $(account-name)
-        TF_CONTAINER_NAME: $(container-name)
-        TF_KEY:           $(key)
-
-    - bash: |
-        printenv
-      displayName: Show ENV vars
       env:
         ARM_SUBSCRIPTION_ID: $(subscription-id)
         ARM_CLIENT_ID:       $(client-id)
@@ -88,7 +66,15 @@ stages:
         TF_CONTAINER_NAME: $(container-name)
         TF_KEY:           $(key)
         PUB_KEY: $(pubKey)
-        
+
+    - task: InstallSSHKey@0
+      inputs:
+        knownHostsEntry: ''
+        sshPublicKey: $PUB_KEY
+        sshKeySecureFile: 'id_rsa'
+      env:
+        PUB_KEY: $(pubKey)
+
 - stage: Build
   displayName: Build FakeRestAPI
   jobs:
