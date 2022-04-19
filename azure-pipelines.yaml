@@ -70,7 +70,7 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: '20.110.68.147'
-        sshPublicKey: $PUB_KEY
+        sshPublicKey: '$PUB_KEY'
         sshKeySecureFile: 'id_rsa'
       env:
         PUB_KEY: $(pubKey)
