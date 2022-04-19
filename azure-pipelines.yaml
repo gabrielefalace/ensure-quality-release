@@ -70,10 +70,8 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: '20.110.68.147'
-        sshPublicKey: '$PUB_KEY'
+        sshPublicKey: '$(pubKey)'
         sshKeySecureFile: 'id_rsa'
-      env:
-        PUB_KEY: $(pubKey)
 
 - stage: Build
   displayName: Build FakeRestAPI
