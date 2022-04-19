@@ -67,13 +67,13 @@ stages:
         TF_KEY:           $(key)
         PUB_KEY: $(pubKey)
 
-    - task: InstallSSHKey@0
-      inputs:
-        knownHostsEntry: ''
-        sshPublicKey: $PUB_KEY
-        sshKeySecureFile: 'id_rsa'
-      env:
-        PUB_KEY: $(pubKey)
+    # - task: InstallSSHKey@0
+    #   inputs:
+    #     knownHostsEntry: ''
+    #     sshPublicKey: $PUB_KEY
+    #     sshKeySecureFile: 'id_rsa'
+    #   env:
+    #     PUB_KEY: $(pubKey)
 
 - stage: Build
   displayName: Build FakeRestAPI
