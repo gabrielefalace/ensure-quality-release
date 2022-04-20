@@ -127,7 +127,7 @@ stages:
       continueOnError: true
       inputs:
         script: 'newman run StarterAPIs.json'
-        workingDirectory: 'ensure-quality-release/automatedtesting/postman'
+        workingDirectory: 'automatedtesting/postman'
 
 - stage: DeployVM
   displayName: Deploy VM for tests
