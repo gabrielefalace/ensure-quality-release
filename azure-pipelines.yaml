@@ -137,7 +137,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - task: CmdLine@2
-      displayName: Install Newman
+      displayName: Install python and run tests
       inputs:
         script: |
           #! /bin/bash              
@@ -146,8 +146,7 @@ stages:
           sudo apt-get install unzip -y
           sudo apt-get install -y chromium-browser
           pip3 install selenium
-          echo 'Hello, ready to work in this virtual machine'
-          ls -lah
+          python3 login.py
         workingDirectory: 'automatedtesting/selenium'
 
 # - stage: DeployVM
