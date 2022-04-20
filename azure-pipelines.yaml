@@ -129,27 +129,48 @@ stages:
         script: 'newman run StarterAPIs.json'
         workingDirectory: 'automatedtesting/postman'
 
-- stage: DeployVM
-  displayName: Deploy VM for tests
+- stage: UITest
+  displayName: Selenium UI Funcional Tets
   jobs:
-  - deployment: VMDeploy
-    environment:
-      name:  'TEST'
-      resourceType: VirtualMachine
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: Bash@3
-            inputs:
-              targetType: 'inline'
-              script: |
-                #! /bin/bash              
-                sudo apt-get upgrade -y
-                sudo apt-get install python3-pip -y
-                sudo apt-get install unzip -y
-                sudo apt-get install -y chromium-browser
-                pip3 install selenium
-                echo 'Hello, ready to work in this virtual machine'
-                ls -lah
-#                export PATH=$PATH:some/path
+  - job: RunSeleniumTests
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: CmdLine@2
+      displayName: Install Newman
+      inputs:
+        script: |
+          #! /bin/bash              
+          sudo apt-get upgrade -y
+          sudo apt-get install python3-pip -y
+          sudo apt-get install unzip -y
+          sudo apt-get install -y chromium-browser
+          pip3 install selenium
+          echo 'Hello, ready to work in this virtual machine'
+          ls -lah
+        workingDirectory: 'automatedtesting/selenium'
+
+# - stage: DeployVM
+#   displayName: Deploy VM for tests
+#   jobs:
+#   - deployment: VMDeploy
+#     environment:
+#       name:  'TEST'
+#       resourceType: VirtualMachine
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - task: Bash@3
+#             inputs:
+#               targetType: 'inline'
+#               script: |
+#                 #! /bin/bash              
+#                 sudo apt-get upgrade -y
+#                 sudo apt-get install python3-pip -y
+#                 sudo apt-get install unzip -y
+#                 sudo apt-get install -y chromium-browser
+#                 pip3 install selenium
+#                 echo 'Hello, ready to work in this virtual machine'
+#                 ls -lah
+#                 export PATH=$PATH:some/path
