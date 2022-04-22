@@ -144,7 +144,7 @@ stages:
           sudo apt-get upgrade -y
           sudo apt-get install python3-pip -y
           sudo apt-get install unzip -y
-          sudo apt-get install -y chromium-browser=100
+          sudo apt-get install -y chromium-browser=102
           sudo apt-get install chromium-chromedriver=100
           sudo pip3 install selenium
           sudo pip3 install -U urllib3 requests
