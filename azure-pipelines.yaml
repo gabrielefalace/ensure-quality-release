@@ -147,7 +147,7 @@ stages:
           sudo apt-get install -y chromium-browser
           sudo apt-get install chromium-chromedriver
           sudo pip3 install selenium
-          sudo pip3 install requests
+          sudo pip3 install -U urllib3 requests
           sudo python3 login.py
         workingDirectory: 'automatedtesting/selenium'
 
