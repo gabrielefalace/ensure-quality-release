@@ -130,7 +130,7 @@ stages:
         workingDirectory: 'automatedtesting/postman'
 
 - stage: UITest
-  displayName: Selenium UI Funcional Tets
+  displayName: Selenium UI Funcional Tests
   jobs:
   - job: RunSeleniumTests
     pool:
