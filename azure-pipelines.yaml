@@ -154,7 +154,7 @@ stages:
           sudo python3 login.py
         workingDirectory: 'automatedtesting/selenium'
 
-- stage: Performance Tests
+- stage: PerformanceTests
   displayName: Performace Tests
   jobs:
   - job: Run JMeter Performance Tests
