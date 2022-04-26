@@ -155,17 +155,17 @@ stages:
         workingDirectory: 'automatedtesting/selenium'
 
 - stage: Performance Tests
-displayName: Performace Tests
-jobs:
-- job: Run JMeter Performance Tests
-  pool:
-    vmImage: $(vmImageName)
-  steps:
-  - task: CmdLine@2
-    displayName: Install JMeter
-    inputs:
-      script: 'sudo apt-get install -y jmeter'
-      workingDirectory: $(projectRoot)
+  displayName: Performace Tests
+  jobs:
+  - job: Run JMeter Performance Tests
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: CmdLine@2
+      displayName: Install JMeter
+      inputs:
+        script: 'sudo apt-get install -y jmeter'
+        workingDirectory: $(projectRoot)
 
 # - stage: DeployVM
 #   displayName: Deploy VM for tests
