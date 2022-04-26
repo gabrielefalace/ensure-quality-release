@@ -157,7 +157,7 @@ stages:
 - stage: PerformanceTests
   displayName: Performace Tests
   jobs:
-  - job: Run JMeter Performance Tests
+  - job: RunJMeterTests
     pool:
       vmImage: $(vmImageName)
     steps:
