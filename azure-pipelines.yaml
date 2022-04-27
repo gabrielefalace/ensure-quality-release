@@ -175,7 +175,7 @@ stages:
           sudo dpkg -L jmeter
           sudo /usr/bin/jmeter -n -t Starter.jmx -l testresults.jtl
           sudo cat testresults.jtl
-        workingDirectory: 'automatedtesting/jmeter'
+        workingDirectory: '.'
 
 # - stage: DeployVM
 #   displayName: Deploy VM for tests
