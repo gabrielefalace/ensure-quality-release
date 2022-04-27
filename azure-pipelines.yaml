@@ -167,6 +167,9 @@ stages:
       inputs:
         script: |
           sudo apt-get install -y jmeter
+          touch testresults.jtl
+          jmeter -n –t Starter.jmx -l testresults.jtl
+          cat testresults.jtl
         workingDirectory: $(projectRoot)
 
 # - stage: DeployVM
