@@ -169,7 +169,10 @@ stages:
           #! /bin/bash
           sudo apt-get install -y jmeter
           sudo touch testresults.jtl
-          sudo jmeter -n –t Starter.jmx -l testresults.jtl
+          sudo echo 'Listing'
+          sudo ls -ahl
+          ./jmeter.sh --version
+          sudo jmeter -n -t Starter.jmx -l testresults.jtl
           sudo cat testresults.jtl
         workingDirectory: 'automatedtesting/jmeter'
 
