@@ -166,11 +166,12 @@ stages:
       displayName: Install JMeter
       inputs:
         script: |
+          #! /bin/bash
           sudo apt-get install -y jmeter
-          touch testresults.jtl
-          jmeter -n –t Starter.jmx -l testresults.jtl
-          cat testresults.jtl
-        workingDirectory: 'automatedtesting/selenium'
+          sudo touch testresults.jtl
+          sudo jmeter -n –t Starter.jmx -l testresults.jtl
+          sudo cat testresults.jtl
+        workingDirectory: 'automatedtesting/jmeter'
 
 # - stage: DeployVM
 #   displayName: Deploy VM for tests
