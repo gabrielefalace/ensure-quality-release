@@ -91,6 +91,7 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
+
 - stage: DeployAPI
   displayName: Deploy FakeRestAPI
   jobs:
