@@ -170,7 +170,7 @@ stages:
           touch testresults.jtl
           jmeter -n –t Starter.jmx -l testresults.jtl
           cat testresults.jtl
-        workingDirectory: $(projectRoot)
+        workingDirectory: 'automatedtesting/selenium'
 
 # - stage: DeployVM
 #   displayName: Deploy VM for tests
