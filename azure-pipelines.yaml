@@ -78,7 +78,7 @@ stages:
   jobs:
   - job: Build
     pool:
-      vmImageName: 'ubuntu-latest'
+      vmImage: $(vmImageName)
     steps:
     
     - task: ArchiveFiles@2
@@ -97,7 +97,7 @@ stages:
   jobs:
   - deployment: FakeRestAPI
     pool:
-      vmImageName: 'ubuntu-latest'
+      vmImage: $(vmImageName)
     environment: 'TEST'
     strategy:
       runOnce:
