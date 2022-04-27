@@ -173,7 +173,7 @@ stages:
           sudo ls -ahl
           echo 'Locating JMeter'
           sudo dpkg -L jmeter
-          sudo jmeter -n -t Starter.jmx -l testresults.jtl
+          sudo /usr/bin/jmeter -n -t Starter.jmx -l testresults.jtl
           sudo cat testresults.jtl
         workingDirectory: 'automatedtesting/jmeter'
 
