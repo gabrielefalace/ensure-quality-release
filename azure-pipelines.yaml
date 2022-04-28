@@ -166,14 +166,13 @@ stages:
       displayName: Install JMeter
       inputs:
         script: |
-          #! /bin/bash
-          sudo apt-get install -y jmeter
-          sudo touch testresults.jtl
-          sudo echo 'Listing'
-          sudo ls -ahl
-          echo 'Locating JMeter'
-          sudo dpkg -L jmeter
-          sudo /usr/bin/jmeter -n -t Starter.jmx -l testresults.jtl
+          sudo apt-get install -y jmeter &&\
+          sudo touch testresults.jtl &&\
+          sudo echo 'Listing' &&\
+          sudo ls -ahl &&\
+          echo 'Locating JMeter' &&\
+          sudo dpkg -L jmeter  &&\
+          sudo /usr/bin/jmeter -n -t Starter.jmx -l testresults.jtl &&\
           sudo cat testresults.jtl
         workingDirectory: '.'
 
