@@ -166,6 +166,7 @@ stages:
       displayName: Install JMeter
       inputs:
         script: |
+          sudo apt-get update &&\
           sudo apt-get install -y jmeter &&\
           sudo touch testresults.jtl &&\
           sudo echo 'Listing' &&\
